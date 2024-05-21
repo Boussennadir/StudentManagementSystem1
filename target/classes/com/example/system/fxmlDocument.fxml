@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="StacPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.system.HelloController">
+   <children>
+      <AnchorPane fx:id="MAINPANE" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane fx:id="BorderPAne" layoutX="151.0" layoutY="65.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane fx:id="TOpBarPAne" prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="Lable_1" layoutX="41.0" layoutY="10.0" text="Student Management System" />
+                        <ImageView fx:id="IconsApp" fitHeight="34.0" fitWidth="27.0" layoutX="9.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@chapeau-etudiant.png" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="767.0" layoutY="5.0" mnemonicParsing="false" onAction="#OncloseButton" text="X">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="740.0" layoutY="5.0" mnemonicParsing="false" onAction="#Onminimize" text="-">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane fx:id="RightPane" prefHeight="366.0" prefWidth="162.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ImageView fx:id="LOGOPERSSON" fitHeight="125.0" fitWidth="114.0" layoutX="24.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@etudiant-avec-bonnet-de-graduation.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="Add_StudentButton" layoutX="18.0" layoutY="196.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="24.0" prefWidth="132.0" text="Add Student" />
+                        <Button fx:id="MoyenCalculatorButton" layoutX="18.0" layoutY="242.0" mnemonicParsing="false" onAction="#switchForm" text="Moyen Calculator" />
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane fx:id="DissplayPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="AddStudntPagePane" layoutX="47.0" layoutY="25.0" prefHeight="416.0" prefWidth="638.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="LableFirstName" layoutX="217.0" layoutY="262.0" text="First Name :" />
+                              <TextField fx:id="TextFeildFirstName" layoutX="300.0" layoutY="258.0" prefHeight="24.0" prefWidth="112.0" />
+                              <Label fx:id="LableLastName" layoutX="217.0" layoutY="290.0" text="Last Name :" />
+                              <TextField fx:id="TextFeildLastName" layoutX="302.0" layoutY="288.0" prefHeight="24.0" prefWidth="111.0" />
+                              <TextField fx:id="TextFiealdSearch" layoutX="9.0" layoutY="4.0" onAction="#OnSearchTextF" prefHeight="24.0" prefWidth="134.0" promptText="   Search" />
+                              <ImageView fx:id="SearchIcons" fitHeight="19.0" fitWidth="15.0" layoutX="13.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@baseline_search_black_24dp.png" />
+                                 </image>
+                              </ImageView>
+                              <TableView fx:id="AddStudentTableView" layoutY="34.0" prefHeight="216.0" prefWidth="637.0">
+                                 <columns>
+                                    <TableColumn fx:id="StudentIdCOLT" prefWidth="74.33332824707031" text="Student#" />
+                                    <TableColumn fx:id="YearCOLT" prefWidth="54.0" text="Year" />
+                                    <TableColumn fx:id="FNameCOLT" prefWidth="89.0" text="First Name" />
+                                    <TableColumn fx:id="LNameCOLT" prefWidth="83.66665649414062" text="Last Name" />
+                                    <TableColumn fx:id="GendreCOLT" minWidth="2.33331298828125" prefWidth="97.3333740234375" text="Gendre" />
+                                    <TableColumn fx:id="BirthdayCOLT" minWidth="2.33331298828125" prefWidth="93.6666259765625" text="Birthday" />
+                                    <TableColumn fx:id="StatusCOLT" minWidth="2.33331298828125" prefWidth="140.0" text="Grades" />
+                                 </columns>
+                              </TableView>
+                              <Label fx:id="Label_StudentID" layoutX="9.0" layoutY="261.0" text="Student # :" />
+                              <Label fx:id="LabelYear" layoutX="10.0" layoutY="292.0" text="Year :" />
+                              <Label fx:id="GendreLable" layoutX="218.0" layoutY="323.0" text="Gendre :" />
+                              <ComboBox fx:id="GEndreComboBox" layoutX="302.0" layoutY="318.0" prefHeight="24.0" prefWidth="112.0" promptText="Choose" />
+                              <ComboBox fx:id="YearComboBox" layoutX="85.0" layoutY="287.0" prefHeight="24.0" prefWidth="112.0" promptText="Choose" />
+                              <TextField fx:id="TextFiledStudentID" layoutX="85.0" layoutY="258.0" prefHeight="24.0" prefWidth="112.0" />
+                              <DatePicker fx:id="DatePicker" layoutX="301.0" layoutY="349.0" prefHeight="24.0" prefWidth="115.0" />
+                              <Label fx:id="LableBirday" layoutX="217.0" layoutY="353.0" text="Birthday :" />
+                              <Label fx:id="StatusLabel" layoutX="218.0" layoutY="381.0" text="Grades: " />
+                              <Button fx:id="AddButton" layoutX="544.0" layoutY="319.0" mnemonicParsing="false" onAction="#OnADDButton1" prefHeight="24.0" prefWidth="73.0" text="ADD" />
+                              <Button fx:id="DeleteButton" layoutX="462.0" layoutY="318.0" mnemonicParsing="false" onAction="#OnDeleteButton1" text="DELETE" />
+                              <TextField fx:id="GradesTextFeild" layoutX="301.0" layoutY="377.0" prefHeight="24.0" prefWidth="117.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="MoyenCalculatorPane" layoutX="-1.0" prefHeight="416.0" prefWidth="638.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="FyearButton" layoutX="4.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchFormYears" text="1 Year ">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="SYearsButton" layoutX="4.0" layoutY="98.0" mnemonicParsing="false" onAction="#switchFormYears" text="2 Year ">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="THYearsButton" layoutX="4.0" layoutY="152.0" mnemonicParsing="false" onAction="#Alert" text="3 Year ">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="FYearsButton" layoutX="4.0" layoutY="211.0" mnemonicParsing="false" onAction="#Alert" text="4 Year ">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="FifYearsButton" layoutX="4.0" layoutY="268.0" mnemonicParsing="false" onAction="#Alert" text="5 Year ">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <AnchorPane fx:id="SemestrePane" layoutX="101.0" prefHeight="416.0" prefWidth="536.0" visible="false">
+                                 <children>
+                                    <AnchorPane fx:id="Semestre1year2ModulePanel" layoutX="160.0" prefHeight="416.0" prefWidth="379.0" visible="false">
+                                       <children>
+                                          <Label fx:id="OOP1Lable" layoutX="7.0" layoutY="39.0" text="OOP 1" />
+                                          <TextField fx:id="OOP1EXAMtextFeild" layoutX="68.0" layoutY="35.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="OOP1TPtextFeild" layoutX="166.0" layoutY="34.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="191.0" />
+                                          <Label fx:id="Examen3Lable" layoutX="85.0" layoutY="6.0" text="EXAM" />
+                                          <Label fx:id="Tp3lable" layoutX="297.0" layoutY="8.0" text="TP" />
+                                          <Label fx:id="TD3lable" layoutX="189.0" layoutY="8.0" text="TD" />
+                                          <Label fx:id="ANAlyse3Lable" layoutX="5.0" layoutY="101.0" text="ANLYSE" />
+                                          <TextField fx:id="ExamenAnalyse3TextFeild" layoutX="68.0" layoutY="97.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDAnalyse3TextFeild" layoutX="169.0" layoutY="97.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="186.0" />
+                                          <Label fx:id="Algebra3LAble" layoutX="2.0" layoutY="136.0" text="ALGEBRE" />
+                                          <TextField fx:id="ExamenAlgebre5" layoutX="69.0" layoutY="132.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDALgebre3TextFeild" layoutX="170.0" layoutY="132.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="186.0" />
+                                          <Label fx:id="Proba3lable" layoutX="6.0" layoutY="178.0" text="PROBA " />
+                                          <TextField fx:id="ExamenProba3TextFeild" layoutX="68.0" layoutY="174.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDProba3TF" layoutX="169.0" layoutY="174.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="188.0" />
+                                          <Label fx:id="Arch2lable" layoutX="5.0" layoutY="223.0" text="ARCH 2" />
+                                          <TextField fx:id="ExamenARCH2TextFeild" layoutX="68.0" layoutY="219.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <Label fx:id="Algo3LAble" layoutX="3.0" layoutY="264.0" text="ALGO " />
+                                          <TextField fx:id="ExamenALgo3TextF" layoutX="68.0" layoutY="261.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="81.0" />
+                                          <TextField fx:id="TDARCH2TF" layoutX="169.0" layoutY="217.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="186.0" />
+                                          <Label fx:id="EntrpronariaLable" layoutX="4.0" layoutY="311.0" text="ENTRP" />
+                                          <TextField fx:id="EntrpronariaTextFeild" layoutX="68.0" layoutY="307.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="287.0" />
+                                          <Button fx:id="CalculeButton3" layoutX="66.0" layoutY="346.0" mnemonicParsing="false" text="Calcule">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <TextField fx:id="MoyenTextFeild3" editable="false" layoutX="169.0" layoutY="348.0" promptText="0.0" />
+                                          <Label fx:id="FileLAble" layoutX="7.0" layoutY="70.0" text="FILE STR" />
+                                          <TextField fx:id="FileExamenTextFeild" layoutX="68.0" layoutY="65.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TPFileTextFeild" layoutX="169.0" layoutY="64.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="188.0" />
+                                          <TextField fx:id="TDALgo3TextF" layoutX="169.0" layoutY="259.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="185.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="Semestre2year2ModulePanel" layoutX="159.0" prefHeight="416.0" prefWidth="379.0" visible="false">
+                                       <children>
+                                          <Label fx:id="ExamenLable4" layoutX="85.0" layoutY="6.0" text="EXAM" />
+                                          <Label fx:id="TpLable4" layoutX="297.0" layoutY="8.0" text="TP" />
+                                          <Label fx:id="TDLable4" layoutX="189.0" layoutY="8.0" text="TD" />
+                                          <Label fx:id="OOP2Lanle" layoutX="9.0" layoutY="53.0" text="OOP 2" />
+                                          <TextField fx:id="ExamenOOP2TEXTF" layoutX="67.0" layoutY="49.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TPOOP2TextF" layoutX="168.0" layoutY="48.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="188.0" />
+                                          <Label fx:id="SysInfLabel" layoutX="5.0" layoutY="97.0" text="SYS INF" />
+                                          <TextField fx:id="ExamenSystemINFtextF" layoutX="68.0" layoutY="93.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDSystemINFTextF" layoutX="170.0" layoutY="92.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="187.0" />
+                                          <Label fx:id="BDDLABLE" layoutX="12.0" layoutY="139.0" text="BDD" />
+                                          <TextField fx:id="ExamBDDTextF" layoutX="67.0" layoutY="135.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDBDDTextF" layoutX="168.0" layoutY="135.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="187.0" />
+                                          <Label fx:id="GraphLable" layoutX="4.0" layoutY="184.0" text="GRAPH" />
+                                          <TextField fx:id="ExamGraphTextF" layoutX="67.0" layoutY="180.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TPNetworkTextF" layoutX="274.0" layoutY="216.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <Label fx:id="NetworkLblle" layoutX="13.0" layoutY="221.0" text="NET" />
+                                          <TextField fx:id="ExamNetworTextF" layoutX="67.0" layoutY="218.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="76.0" />
+                                          <TextField fx:id="TDGraphTextF" layoutX="169.0" layoutY="178.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="185.0" />
+                                          <Label fx:id="EnglishLable" layoutX="4.0" layoutY="320.0" text="ENGLISH" />
+                                          <TextField fx:id="EnglaisExamTextF2" layoutX="68.0" layoutY="316.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="287.0" />
+                                          <Button fx:id="CalculeButton4" layoutX="64.0" layoutY="351.0" mnemonicParsing="false" text="Calcule">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <TextField fx:id="MoyenTextF4" editable="false" layoutX="167.0" layoutY="353.0" promptText="0.0" />
+                                          <TextField fx:id="TDNetworTextF" layoutX="172.0" layoutY="215.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="76.0" />
+                                          <TextField fx:id="ProjectExamTextF21" layoutX="68.0" layoutY="280.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="287.0" />
+                                          <Label fx:id="ProjectLable1" layoutX="4.0" layoutY="284.0" text="Project" />
+                                          <Label fx:id="langageLblle1" layoutX="1.0" layoutY="254.0" text="Langague" />
+                                          <TextField fx:id="ExamLangagueTextF1" layoutX="69.0" layoutY="250.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="76.0" />
+                                          <TextField fx:id="TDLangagueTextF1" layoutX="174.0" layoutY="248.0" onKeyPressed="#handleNumberInput" prefHeight="24.0" prefWidth="182.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Button fx:id="FSemestreButton22" layoutX="7.0" layoutY="142.0" mnemonicParsing="false" onAction="#switchFormYearsSemestre3" prefHeight="33.0" prefWidth="143.0" text="3 Semestre  ">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="LSemestreButton22" layoutX="7.0" layoutY="190.0" mnemonicParsing="false" onAction="#switchFormYearsSemestre3" prefHeight="33.0" prefWidth="143.0" text="4 Semestre  ">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="SemestrePane2" layoutX="100.0" prefHeight="416.0" prefWidth="538.0" visible="false">
+                                 <children>
+                                    <AnchorPane fx:id="Semestre1year1ModulePanel" layoutX="160.0" layoutY="-1.0" prefHeight="416.0" prefWidth="379.0" visible="false">
+                                       <children>
+                                          <Label fx:id="Algo1LAble" layoutX="7.0" layoutY="39.0" text="ALGO 1" />
+                                          <TextField fx:id="ExamenAlgo1TextF" layoutX="68.0" layoutY="35.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TPAlgo1TextF" layoutX="277.0" layoutY="34.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDAlgo1TextF" layoutX="169.0" layoutY="35.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <Label layoutX="85.0" layoutY="6.0" text="EXAM" />
+                                          <Label layoutX="297.0" layoutY="8.0" text="TP" />
+                                          <Label layoutX="189.0" layoutY="8.0" text="TD" />
+                                          <Label fx:id="ANalyseLable" layoutX="5.0" layoutY="80.0" text="ANLYSE" />
+                                          <TextField fx:id="ExamenAnalyse1TExtF" layoutX="68.0" layoutY="76.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDAnalyse1TExtF" layoutX="173.0" layoutY="75.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="184.0" />
+                                          <Label fx:id="AlgebreLable" layoutX="2.0" layoutY="124.0" text="ALGEBRE" />
+                                          <TextField fx:id="ExamAlgebreTEXTF" layoutX="69.0" layoutY="120.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDAlgebreTEXTF" layoutX="171.0" layoutY="119.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="187.0" />
+                                          <Label fx:id="Arch1LAble" layoutX="6.0" layoutY="166.0" text="ARCH 1" />
+                                          <TextField fx:id="ExamARCH1TEXTF" layoutX="68.0" layoutY="162.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDARCH1TEXTF" layoutX="172.0" layoutY="161.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="185.0" />
+                                          <Label fx:id="SYSEXPlable" layoutX="5.0" layoutY="211.0" text="SYS EXP" />
+                                          <TextField fx:id="ExamSYSTEMEXPTEXTF" layoutX="68.0" layoutY="207.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TPBeruTextF" layoutX="275.0" layoutY="247.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDSYSTEMEXPTEXTF" layoutX="169.0" layoutY="207.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <Label fx:id="BeruLable" layoutX="3.0" layoutY="252.0" text="BUR WEB" />
+                                          <TextField fx:id="ExamBeruTextF" layoutX="68.0" layoutY="249.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="182.0" />
+                                          <TextField fx:id="TPSYSTEMEXPTEXTF" layoutX="275.0" layoutY="205.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <Label fx:id="EnglishLable2" layoutX="4.0" layoutY="299.0" text="ENGLISH" />
+                                          <TextField fx:id="ExamenEnglishTEXTF1" layoutX="68.0" layoutY="295.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="287.0" />
+                                          <Button fx:id="CalculeButton1" layoutX="66.0" layoutY="346.0" mnemonicParsing="false" text="Calcule">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <TextField fx:id="MoyenTExtF1" editable="false" layoutX="169.0" layoutY="348.0" promptText="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="Semestre2year1ModulePanel" layoutX="160.0" prefHeight="416.0" prefWidth="379.0" visible="false">
+                                       <children>
+                                          <Label fx:id="ALGO2LAble" layoutX="7.0" layoutY="39.0" text="ALGO 2" />
+                                          <TextField fx:id="ExamAlgo2TextF" layoutX="68.0" layoutY="35.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TPAlgo2TextF" layoutX="277.0" layoutY="34.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDAlgo2TextF" layoutX="169.0" layoutY="35.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <Label fx:id="ExamLable2" layoutX="85.0" layoutY="6.0" text="EXAM" />
+                                          <Label fx:id="TpLable2" layoutX="297.0" layoutY="8.0" text="TP" />
+                                          <Label fx:id="TDLable2" layoutX="189.0" layoutY="8.0" text="TD" />
+                                          <Label fx:id="ANALYSE2LABLE" layoutX="5.0" layoutY="80.0" text="ANLYSE" />
+                                          <TextField fx:id="ExamAnalyse2TextF" layoutX="68.0" layoutY="76.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDAnalyse2TextF" layoutX="171.0" layoutY="75.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="186.0" />
+                                          <Label fx:id="Algebre2lable" layoutX="2.0" layoutY="124.0" text="ALGEBRE" />
+                                          <TextField fx:id="ExamALgebre2TExtF" layoutX="69.0" layoutY="120.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDALgebre2TExtF" layoutX="172.0" layoutY="119.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="186.0" />
+                                          <Label fx:id="Proba1Lable" layoutX="6.0" layoutY="166.0" text="PROBA " />
+                                          <TextField fx:id="ExamProba2TextF" layoutX="68.0" layoutY="162.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDProba2TextF" layoutX="167.0" layoutY="161.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="190.0" />
+                                          <Label fx:id="SystemEXP2lable" layoutX="5.0" layoutY="211.0" text="SYS EXP" />
+                                          <TextField fx:id="ExamSystemEXp2TextF" layoutX="68.0" layoutY="207.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <TextField fx:id="TDLogiqueTextF" layoutX="168.0" layoutY="247.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="187.0" />
+                                          <TextField fx:id="TDSystemEXp2TextF" layoutX="169.0" layoutY="207.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <Label fx:id="LogiqueLable" layoutX="3.0" layoutY="252.0" text="LOGIQUE" />
+                                          <TextField fx:id="ExamLogiqueTextF" layoutX="68.0" layoutY="249.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="76.0" />
+                                          <TextField fx:id="TPSystemEXp2TextF" layoutX="275.0" layoutY="205.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="80.0" />
+                                          <Label fx:id="EnglaisLable" layoutX="4.0" layoutY="299.0" text="ENGLISH" />
+                                          <TextField fx:id="ExamEnglais2TextF" layoutX="68.0" layoutY="295.0" onKeyTyped="#handleNumberInput" prefHeight="24.0" prefWidth="287.0" />
+                                          <Button fx:id="CalculeButton2" layoutX="66.0" layoutY="346.0" mnemonicParsing="false" text="Calcule">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <TextField fx:id="MoyenTextF2" editable="false" layoutX="169.0" layoutY="348.0" promptText="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Button fx:id="FSemestreButton21" layoutX="7.0" layoutY="142.0" mnemonicParsing="false" onAction="#switchFormYearsSemestre" prefHeight="33.0" prefWidth="143.0" text="1 Semestre  ">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="LSemestreButton21" layoutX="7.0" layoutY="190.0" mnemonicParsing="false" onAction="#switchFormYearsSemestre" prefHeight="33.0" prefWidth="143.0" text="2 Semestre  ">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="principalePane" layoutY="1.0" prefHeight="414.0" prefWidth="638.0" visible="false">
+                           <children>
+                              <Label fx:id="welcomLabel" layoutX="158.0" layoutY="124.0" text="Welcome">
+                                 <font>
+                                    <Font name="Gurajada" size="96.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
