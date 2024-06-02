@@ -1,12 +1,18 @@
 package com.example.system;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
+import DataBase.StudentDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -79,7 +85,7 @@ public class HelloController extends TextField {
         private Label BeruLable;
 
         @FXML
-        private TableColumn<String, String> BirthdayCOLT;
+        private TableColumn<Student, String> BirthdayCOLT;
 
         @FXML
         private BorderPane BorderPAne;
@@ -202,7 +208,7 @@ public class HelloController extends TextField {
         private TextField ExamenSystemINFtextF;
 
         @FXML
-        private TableColumn<String, String> FNameCOLT;
+        private TableColumn<Student, String> FNameCOLT;
 
         @FXML
         private Button FSemestreButton21;
@@ -229,7 +235,7 @@ public class HelloController extends TextField {
         private ComboBox <String> GEndreComboBox;
 
         @FXML
-        private TableColumn<String, Integer> GendreCOLT;
+        private TableColumn<Student, Integer> GendreCOLT;
 
         @FXML
         private Label GendreLable;
@@ -244,13 +250,16 @@ public class HelloController extends TextField {
         private ImageView IconsApp;
 
         @FXML
-        private TableColumn<String, String> LNameCOLT;
+        private TableColumn<Student, String> LNameCOLT;
 
         @FXML
         private ImageView LOGOPERSSON;
 
         @FXML
         private Button LSemestreButton21;
+
+        @FXML
+        private Button SerchButton;
 
         @FXML
         private Button LSemestreButton22;
@@ -352,13 +361,13 @@ public class HelloController extends TextField {
         private StackPane StacPane;
 
         @FXML
-        private TableColumn<String, Integer> StatusCOLT;
+        private TableColumn<Student, Integer> StatusCOLT;
 
         @FXML
         private Label StatusLabel;
 
         @FXML
-        private TableColumn<String, String> StudentIdCOLT;
+        private TableColumn<Student, Double> StudentIdCOLT;
 
         @FXML
         private Label SysInfLabel;
@@ -499,7 +508,7 @@ public class HelloController extends TextField {
         private TextField ProjectExamTextF21;
 
         @FXML
-        private TableColumn<String, Integer> YearCOLT;
+        private TableColumn<Student, Integer> YearCOLT;
 
         @FXML
         private ComboBox<String> YearComboBox;
@@ -524,26 +533,28 @@ public class HelloController extends TextField {
         }
 
         @FXML
-        void OnADDButton1(ActionEvent event) {
-                 String studentId = TextFiledStudentID.getText();
-                 String year = YearComboBox.getSelectionModel().getSelectedItem();
-                 String firstName = TextFeildFirstName.getText();
-                 String lastName = TextFeildLastName.getText();
-                 String gendre = GEndreComboBox.getSelectionModel().getSelectedItem();
-                 String Grade = GradesTextFeild.getText();
-                 LocalDate birthday = DatePicker.getValue() ;
-                if (studentId!=null && !year.isEmpty()&& firstName!=null && !lastName.isEmpty()&& !gendre.isEmpty()&& birthday!=null && !Grade.isEmpty()) {
-                        try {
-                                int studentIdd = Integer.parseInt(studentId);
-                                int yearr = Integer.parseInt(year);
-                                double Gradee = Double.parseDouble(Grade);
-                                students.add(new Student(studentIdd, yearr, firstName, lastName, gendre, birthday, Gradee));
-                                // ... (clear text fields)
-                        } catch (NumberFormatException e) {
-                                // Handle invalid student ID
-                        }
-                }
+        void OnADDButton1(ActionEvent event) throws SQLException, ClassNotFoundException {
+
+                int studentId = Integer.parseInt(TextFiledStudentID.getText());
+                int year = Integer.parseInt(YearComboBox.getSelectionModel().getSelectedItem());
+                String firstName = TextFeildFirstName.getText();
+                String lastName = TextFeildLastName.getText();
+                String gender = GEndreComboBox.getSelectionModel().getSelectedItem();
+                LocalDate birthday = DatePicker.getValue() ;
+                double grade = Double.parseDouble(GradesTextFeild.getText());
+
+                Student student = new Student(studentId, year, firstName, lastName, gender, birthday, grade);
+                StudentDao.insertStudent(student);
+
+                studentsListe.add(student);
+
+                TextFiledStudentID.clear();
+                TextFeildFirstName.clear();
+                TextFeildLastName.clear();
+                GradesTextFeild.clear();
         }
+
+
 
         @FXML
         void OncloseButton(ActionEvent event) {
@@ -558,13 +569,28 @@ public class HelloController extends TextField {
 
         @FXML
         void OnDeleteButton1(ActionEvent event) {
-
+                Student selectedStudent = AddStudentTableView.getSelectionModel().getSelectedItem();
+                if (selectedStudent != null) {
+                        StudentDao.deleteStudent(selectedStudent.getStudentId());
+                        studentsListe.remove(selectedStudent);
+                        studentsListe.remove(selectedStudent);
+                }
         }
+
 
         @FXML
         void OnSearchTextF(ActionEvent event) {
+                String searchText = TextFiealdSearch.getText().toLowerCase();
 
+                List<Student> filteredStudents = studentsListe.stream()
+                        .filter(student -> String.valueOf(student.getStudentId()).contains(searchText) ||
+                                student.getFirstName().toLowerCase().contains(searchText) ||
+                                student.getLastName().toLowerCase().contains(searchText))
+                        .collect(Collectors.toList());
+
+                AddStudentTableView.setItems(FXCollections.observableArrayList(filteredStudents));
         }
+
         @FXML
         private TextField gradeTextField;
 
@@ -577,9 +603,6 @@ public class HelloController extends TextField {
         }
 
 
-        @FXML
-        void onCalculeButton4(){
-        }
 
         @FXML
         void switchForm(ActionEvent event) {
@@ -596,6 +619,7 @@ public class HelloController extends TextField {
                 }
 
         }
+
 
         @FXML
         void switchFormYears(ActionEvent event) {
@@ -649,20 +673,34 @@ public class HelloController extends TextField {
         }
 
 
-        private ObservableList<Student> students;
+
+
+        private void loadStudents() {
+                List<Student> students = StudentDao.getAllStudents();
+                studentsListe.addAll(students);
+        }
+
+
+        private ObservableList <Student> studentsListe =FXCollections.observableArrayList();
+
+
+        private  StudentDao studentDao;
+
+
         @FXML
-        void initialize() {
+        void initialize() throws SQLException, ClassNotFoundException {
 
-
-                StudentIdCOLT.setCellValueFactory(new PropertyValueFactory<>("ID"));
+                StudentIdCOLT.setCellValueFactory(new PropertyValueFactory<>("studentId"));
                 YearCOLT.setCellValueFactory(new PropertyValueFactory<>("Year"));
-                FNameCOLT.setCellValueFactory(new PropertyValueFactory<>("FirsName"));
+                FNameCOLT.setCellValueFactory(new PropertyValueFactory<>("firstName"));
                 LNameCOLT.setCellValueFactory(new PropertyValueFactory<>("LastName"));
                 GendreCOLT.setCellValueFactory(new PropertyValueFactory<>("gendre"));
                 BirthdayCOLT.setCellValueFactory(new PropertyValueFactory<>("birthday"));
                 StatusCOLT.setCellValueFactory(new PropertyValueFactory<>("Grade"));
-                students= FXCollections.observableArrayList();
-                AddStudentTableView.setItems(students);
+                studentsListe= FXCollections.observableArrayList();
+                AddStudentTableView.setItems(studentsListe);
+                loadStudents();
+
 
 
 
@@ -1326,12 +1364,29 @@ public class HelloController extends TextField {
                 });
 
 
+                FilteredList<Student> fListe = new FilteredList<>(studentsListe, b -> true);
+                TextFiealdSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (newValue == null) {
+                                return; // No need to filter, show all students
+                        }
 
+                        String search = newValue.toLowerCase();
 
+                        fListe.setPredicate(student -> {
+                                if (student.getFirstName() != null && student.getFirstName().toLowerCase().indexOf(search) > -1) {
+                                        return true;
+                                } else if (student.getLastName() != null && student.getLastName().toLowerCase().indexOf(search) > -1) {
+                                        return true;
+                                } else {
+                                        return false;
+                                }
+                        });
+                });
 
+                SortedList<Student> slist = new SortedList<>(fListe);
+                slist.comparatorProperty().bind(studentsListe.sorted().comparatorProperty());
 
-
-
+                studentsListe.setAll(slist);
 
 
 
@@ -1452,6 +1507,7 @@ public class HelloController extends TextField {
                 assert Semestre2year2ModulePanel != null : "fx:id=\"Semestre2year2ModulePanel\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
                 assert SemestrePane != null : "fx:id=\"SemestrePane\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
                 assert SemestrePane2 != null : "fx:id=\"SemestrePane2\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
+                assert SerchButton != null : "fx:id=\"SerchButton\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
                 assert StacPane != null : "fx:id=\"StacPane\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
                 assert StatusCOLT != null : "fx:id=\"StatusCOLT\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
                 assert StatusLabel != null : "fx:id=\"StatusLabel\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
@@ -1505,9 +1561,8 @@ public class HelloController extends TextField {
                 assert principalePane != null : "fx:id=\"principalePane\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
                 assert welcomLabel != null : "fx:id=\"welcomLabel\" was not injected: check your FXML file 'fxmlDocument.fxml'.";
 
-
-
         }
+
 
 
 }

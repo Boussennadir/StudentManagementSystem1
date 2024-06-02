@@ -57,18 +57,13 @@
                <center>
                   <AnchorPane fx:id="DissplayPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="AddStudntPagePane" layoutX="47.0" layoutY="25.0" prefHeight="416.0" prefWidth="638.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="AddStudntPagePane" layoutX="47.0" layoutY="25.0" prefHeight="416.0" prefWidth="638.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label fx:id="LableFirstName" layoutX="217.0" layoutY="262.0" text="First Name :" />
                               <TextField fx:id="TextFeildFirstName" layoutX="300.0" layoutY="258.0" prefHeight="24.0" prefWidth="112.0" />
                               <Label fx:id="LableLastName" layoutX="217.0" layoutY="290.0" text="Last Name :" />
                               <TextField fx:id="TextFeildLastName" layoutX="302.0" layoutY="288.0" prefHeight="24.0" prefWidth="111.0" />
-                              <TextField fx:id="TextFiealdSearch" layoutX="9.0" layoutY="4.0" onAction="#OnSearchTextF" prefHeight="24.0" prefWidth="134.0" promptText="   Search" />
-                              <ImageView fx:id="SearchIcons" fitHeight="19.0" fitWidth="15.0" layoutX="13.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@baseline_search_black_24dp.png" />
-                                 </image>
-                              </ImageView>
+                              <TextField fx:id="TextFiealdSearch" layoutX="24.0" layoutY="4.0" onAction="#OnSearchTextF" prefHeight="24.0" prefWidth="134.0" promptText="   Search" />
                               <TableView fx:id="AddStudentTableView" layoutY="34.0" prefHeight="216.0" prefWidth="637.0">
                                  <columns>
                                     <TableColumn fx:id="StudentIdCOLT" prefWidth="74.33332824707031" text="Student#" />
@@ -90,8 +85,13 @@
                               <Label fx:id="LableBirday" layoutX="217.0" layoutY="353.0" text="Birthday :" />
                               <Label fx:id="StatusLabel" layoutX="218.0" layoutY="381.0" text="Grades: " />
                               <Button fx:id="AddButton" layoutX="544.0" layoutY="319.0" mnemonicParsing="false" onAction="#OnADDButton1" prefHeight="24.0" prefWidth="73.0" text="ADD" />
-                              <Button fx:id="DeleteButton" layoutX="462.0" layoutY="318.0" mnemonicParsing="false" onAction="#OnDeleteButton1" text="DELETE" />
+                              <Button fx:id="DeleteButton" layoutX="453.0" layoutY="318.0" mnemonicParsing="false" onAction="#OnDeleteButton1" text="DELETE" />
                               <TextField fx:id="GradesTextFeild" layoutX="301.0" layoutY="377.0" prefHeight="24.0" prefWidth="117.0" />
+                              <ImageView fx:id="SearchIcons" fitHeight="19.0" fitWidth="15.0" layoutX="7.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@baseline_search_black_24dp.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="MoyenCalculatorPane" layoutX="-1.0" prefHeight="416.0" prefWidth="638.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
@@ -293,7 +293,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="principalePane" layoutY="1.0" prefHeight="414.0" prefWidth="638.0" visible="false">
+                        <AnchorPane fx:id="principalePane" layoutY="1.0" prefHeight="414.0" prefWidth="638.0">
                            <children>
                               <Label fx:id="welcomLabel" layoutX="158.0" layoutY="124.0" text="Welcome">
                                  <font>
